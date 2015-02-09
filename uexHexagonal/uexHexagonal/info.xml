@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexHexagonal" version="3.0.1" build="1">
-        <info>1:修复图片顺序问题</info>
+        uexName="uexHexagonal" version="3.0.2" build="2">
+        <info>2:增加cbOpenHexagonal函数回调接口</info>
+        <build>1:修复图片顺序问题</build>
         <build>0:六面体功能插件</build>
     </plugin>
 </uexplugins>

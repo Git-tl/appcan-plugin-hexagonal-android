@@ -99,7 +99,7 @@ public class EUExHexagonal extends EUExBase {
 	}
 
 	private View initView() {
-		TouchSurfaceView touchSurfaceView = new TouchSurfaceView(mContext, mParam);
+		TouchSurfaceView touchSurfaceView = new TouchSurfaceView(this, mContext, mParam);
 		touchSurfaceView.setZOrderOnTop(true);
 		touchSurfaceView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
 		LinearLayout layout = new LinearLayout(mContext);

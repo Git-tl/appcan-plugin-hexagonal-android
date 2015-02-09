@@ -27,6 +27,9 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.List;
 import javax.microedition.khronos.opengles.GL10;
+
+import org.zywx.wbpalmstar.engine.universalex.EUExBase;
+import org.zywx.wbpalmstar.engine.universalex.EUExCallback;
 import org.zywx.wbpalmstar.engine.universalex.EUExUtil;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -41,6 +44,8 @@ import android.util.Pair;
 class Cube {
 	private Context mContext = null;
 	private List<Pair<String, String>> mParam;
+	private EUExBase mEUExBase;
+	public static final String function_openhexagonal = "uexHexagonal.cbOpenHexagonal";
 	private int one = 0x10000;
 	private int vertices[][] = { new int[] { (int) (-0.5f * one), (int) (0.9f * one), (int) (0.816f * one), // 0
 			(int) (0.5f * one), (int) (0.9f * one), (int) (0.816f * one), // 1
@@ -147,6 +152,12 @@ class Cube {
 
 	}
 
+	public Cube(EUExBase base, Context context,
+			List<Pair<String, String>> param) {
+		this(context, param);
+		mEUExBase = base;
+	}
+
 	public void init(GL10 gl) {
 		if (mContext != null)
 			loadTexture(gl, mContext);
@@ -219,6 +230,10 @@ class Cube {
 				bitmap = loadBitmapFromRes(context, mParam.get(j).first);
 			}else{
 				bitmap = loadBitmap(context, resourcesIds[j]);
+			}
+			if (null == bitmap) {
+				mEUExBase.jsCallback(function_openhexagonal, 0, EUExCallback.F_C_INT, 1);
+				return;
 			}
 			// Generate one texture pointer...
 			// ...and bind it to our array

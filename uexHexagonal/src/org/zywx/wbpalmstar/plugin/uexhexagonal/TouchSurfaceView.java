@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
+import org.zywx.wbpalmstar.engine.universalex.EUExBase;
+
 import android.app.Activity;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
@@ -47,6 +50,16 @@ public class TouchSurfaceView extends GLSurfaceView {
 		mParam = param;
 		setEGLConfigChooser(8, 8, 8, 8, 16, 0);
 		mRenderer = new CubeRenderer(context);
+		setRenderer(mRenderer);
+		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+	}
+
+	public TouchSurfaceView(EUExBase base, Context context,
+			List<Pair<String, String>> param) {
+		super(context);
+		mParam = param;
+		setEGLConfigChooser(8, 8, 8, 8, 16, 0);
+		mRenderer = new CubeRenderer(base, context);
 		setRenderer(mRenderer);
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
@@ -132,6 +145,10 @@ public class TouchSurfaceView extends GLSurfaceView {
 		public float mTranslate = 0;
 		public CubeRenderer(Context context) {
 			mCube = new Cube(context, mParam);
+		}
+
+		public CubeRenderer(EUExBase base, Context context) {
+			mCube = new Cube(base, context, mParam);
 		}
 
 		public void onDrawFrame(GL10 gl) {
